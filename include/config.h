@@ -1,0 +1,11 @@
+#ifndef CONFIG_PHYE
+#define CONFIG_PHYE
+
+#define MAX_LINK_NUM 20
+
+#define OPENCL_ACCELERATION
+
+#define DEVICES_INFO_MEDIUM
+#define DEVICES_INFO_HUGE
+
+#endif
