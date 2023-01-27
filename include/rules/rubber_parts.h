@@ -6,13 +6,13 @@
 #define RUBBER_PARTS_RULE
 
 #ifdef OPENCL_ACCELERATION
-#define RUBBER_PARTS_RULE_KERNEL_NAME "rubber_parts_rule"
+#define RUBBER_PARTS_RULE_KERNEL_NAME "rubber_parts_rule_ocl"
 #endif
 
 int rubber_parts_rule_check(OBJECT obj);
 
 void rubber_parts_rule_action(UNIVERSE* uni, long long i);
 
-void rubber_parts_rule(UNIVERSE* uni, long long i);
+void rubber_parts_rule_cpu(UNIVERSE* uni, long long i);
 
 #endif

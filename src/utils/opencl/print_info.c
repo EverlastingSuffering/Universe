@@ -1,4 +1,6 @@
-#include "simulate/simulate.h"
+#include "utils/opencl/print_info.h"
+#include "universe.h"
+#include <stdio.h>
 
 void printAvailableDevices(const cl_device_id* devices, cl_uint numDevices)
 {
@@ -109,39 +111,45 @@ void printAvailableDevices(const cl_device_id* devices, cl_uint numDevices)
     printf("\n======== END DEVICES LIST ========\n");
 }
 
-cl_command_queue createCommandQueue(cl_context context)
+char* getProfileInfo(cl_platform_id id, cl_platform_info info_type)
+{
+    size_t size;
+    cl_int err_num;
+    if((err_num = clGetPlatformInfo(id,info_type,0,NULL,&size)) != CL_SUCCESS)
+    {
+        fprintf(stderr,"Can't fetch OpenCL profiles info\n");
+        exit(err_num);
+    }
+    char* info = (char*)malloc(size);
+    if((err_num = clGetPlatformInfo(id,info_type,size,info,NULL)) != CL_SUCCESS)
+    {
+        fprintf(stderr,"Can't fetch OpenCL profiles info\n");
+        exit(err_num);
+    }
+    
+    return info;
+}
+
+void printAvailableProfiles(cl_platform_id* platfroms, cl_int numPlatforms)
 {
     cl_int err_num;
-    cl_uint numDevices;
-
-    if((err_num = clGetContextInfo(context,CL_CONTEXT_NUM_DEVICES,sizeof(cl_uint),&numDevices,NULL)) != CL_SUCCESS)
+    printf("======== BEGIN PROFILES LIST ========\n\n");
+    for(int i = 0; i < numPlatforms; ++i)
     {
-        fprintf(stderr,"Failed fetching number of available devices\n");
-        exit(err_num);
+        printf("ID: %d\n",i);
+        char* info = getProfileInfo(platfroms[i],CL_PLATFORM_PROFILE);
+        printf("PROFILE: %s\n",info);
+        free(info);
+        info = getProfileInfo(platfroms[i],CL_PLATFORM_VERSION);
+        printf("VERSION: %s\n",info);
+        free(info);
+        info = getProfileInfo(platfroms[i],CL_PLATFORM_NAME);
+        printf("NAME: %s\n",info);
+        free(info);
+        info = getProfileInfo(platfroms[i],CL_PLATFORM_VENDOR);
+        printf("VENDOR: %s\n",info);
+        free(info);
+        printf("\n+-\n\n");
     }
-    int device_buff_size = sizeof(cl_device_id)*numDevices;
-    cl_device_id* devices_list = (cl_device_id*)malloc(device_buff_size);
-    if((err_num = clGetContextInfo(context,CL_CONTEXT_DEVICES,device_buff_size,devices_list,NULL)) != CL_SUCCESS)
-    {
-        fprintf(stderr,"Failed fetching list of available devices\n");
-        exit(err_num);
-    }
-    printAvailableDevices(devices_list,numDevices);
-    printf("Choose preferable device: ");
-    int device_id;
-    scanf("%d",&device_id);
-    if(device_id < 0 || device_id >= numDevices)
-    {
-        fprintf(stderr,"Invalid device index\n");
-        exit(1);
-    }
-    cl_command_queue queue = clCreateCommandQueueWithProperties(context,devices_list[device_id],NULL,&err_num);
-    if(err_num)
-    {
-        fprintf(stderr,"Failed creating command queue\n");
-        exit(err_num);
-    }
-    free(devices_list);
-
-    return queue;
+    printf("\n======== END PROFILES LIST ========\n");
 }
