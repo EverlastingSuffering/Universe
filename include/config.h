@@ -11,4 +11,10 @@
 #define DEVICES_INFO_HUGE
 #endif
 
+#ifdef __OPENCL_VERSION__
+#define compat_type(type) __global type
+#else
+#define compat_type(type) type
+#endif
+
 #endif

@@ -106,7 +106,7 @@ void printAvailableDevices(const cl_device_id* devices, cl_uint numDevices)
         }
         printf("MAX WORK-GROUP SIZE: %lu\n",max_work_group);
         #endif
-        printf("\n+-\n\n");
+        printf("\n");
     }
     printf("\n======== END DEVICES LIST ========\n");
 }
@@ -149,7 +149,7 @@ void printAvailableProfiles(cl_platform_id* platfroms, cl_int numPlatforms)
         info = getProfileInfo(platfroms[i],CL_PLATFORM_VENDOR);
         printf("VENDOR: %s\n",info);
         free(info);
-        printf("\n+-\n\n");
+        printf("\n");
     }
     printf("\n======== END PROFILES LIST ========\n");
 }

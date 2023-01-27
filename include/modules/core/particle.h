@@ -1,6 +1,8 @@
 #ifndef PARTICLE_PHYE
 #define PARTICLE_PHYE
 
+#include "ocl_compat.h"
+
 typedef enum part_type
 {
     PT_REGULAR,
@@ -9,12 +11,12 @@ typedef enum part_type
     __PT_LAST
 } PART_TYPE;
 
-typedef struct particle
+typedef struct STRUCT_OCL_ATTRS particle
 {
     PART_TYPE type;
-    long long id;
-    float x,y,z;
-    float vx,vy,vz;
+    uni_long id;
+    uni_float x,y,z;
+    uni_float vx,vy,vz;
 } PARTICLE;
 
 #endif

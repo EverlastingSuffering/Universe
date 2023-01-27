@@ -1,18 +1,16 @@
 #ifndef RUBBER_PARTS_PHYE
 #define RUBBER_PARTS_PHYE
 
-#include "./universe.h"
+#include "universe.h"
+#include "rules/checks/rubber_parts.h"
+#include "rules/actions/rubber_parts.h"
 
 #define RUBBER_PARTS_RULE
 
 #ifdef OPENCL_ACCELERATION
-#define RUBBER_PARTS_RULE_KERNEL_NAME "rubber_parts_rule_ocl"
+#define RUBBER_PARTS_RULE_KERNEL_NAME "rubber_parts_rule"
 #endif
 
-int rubber_parts_rule_check(OBJECT obj);
-
-void rubber_parts_rule_action(UNIVERSE* uni, long long i);
-
-void rubber_parts_rule_cpu(UNIVERSE* uni, long long i);
+void rubber_parts_rule(UNIVERSE* uni, long i);
 
 #endif

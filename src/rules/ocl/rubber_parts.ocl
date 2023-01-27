@@ -1,8 +1,9 @@
 #define OCL_FILE
 #include "universe.h"
-#include "rules/rules.h"
+#include "rules/actions/rubber_parts.h"
+#include "rules/checks/rubber_parts.h"
 
-__kernel void rubber_parts_rule_ocl(__global UNIVERSE* uni)
+__kernel void rubber_parts_rule(__global UNIVERSE* uni)
 {
     
 }

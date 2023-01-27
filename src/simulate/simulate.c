@@ -2,7 +2,7 @@
 
 void simulate_cpu(UNIVERSE* uni)
 {
-    for(long long i = 0; i < uni->objects_num; ++i)
+    for(long i = 0; i < uni->objects_num; ++i)
     {
         run_rules_cpu(uni,i)
     }

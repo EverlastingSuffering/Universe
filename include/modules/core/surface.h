@@ -1,7 +1,9 @@
 #ifndef SURFACE_PHYE
 #define SURFACE_PHYE
 
-typedef struct surface
+#include "ocl_compat.h"
+
+typedef struct STRUCT_OCL_ATTRS surface
 {
     
 } SURFACE;

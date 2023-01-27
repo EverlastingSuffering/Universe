@@ -1,9 +1,9 @@
 #ifndef MODULES_UNI
 #define MODULES_UNI
 
-#include "./modules/core/particle.h"
-#include "./modules/core/polygon.h"
-#include "./modules/core/surface.h"
+#include "modules/core/particle.h"
+#include "modules/core/polygon.h"
+#include "modules/core/surface.h"
 
 
 typedef enum obj_ids

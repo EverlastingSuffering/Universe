@@ -14,4 +14,4 @@
 #endif
 
 #define run_rules_cpu(uni,i)  \
-        rubber_parts_rule_cpu(uni,i);
+        rubber_parts_rule(uni,i);
